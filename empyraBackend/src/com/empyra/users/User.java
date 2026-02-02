@@ -15,6 +15,22 @@ public class User {
 	private String department;
 	
 	
+	public User(String id, String firstName, String middleName, String lastName, String role,
+				String contactNumber, String status, Date createdAt, String createdBy, String department) {
+		id = this.id;
+		firstName = this.firstName;
+		middleName = this.middleName;
+		lastName = this.lastName;
+		role = this.role;
+		contactNumber = this.contactNumber;
+		status = this.status;
+		createdAt = this.createdAt;
+		createdBy = this.createdBy;
+		department = this.department;
+		
+	}
+	
+	
 	public String getId() {
 		return id;
 	}
