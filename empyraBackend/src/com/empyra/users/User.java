@@ -21,16 +21,16 @@ public class User {
 	
 	public User(String id, String firstName, String middleName, String lastName, String role,
 				String contactNumber, String status, Date createdAt, String createdBy, String department) {
-		id = this.id;
-		firstName = this.firstName;
-		middleName = this.middleName;
-		lastName = this.lastName;
-		role = this.role;
-		contactNumber = this.contactNumber;
-		status = this.status;
-		createdAt = this.createdAt;
-		createdBy = this.createdBy;
-		department = this.department;
+		this.id = id;
+		this.firstName = firstName;
+		this.middleName = middleName;
+		this.lastName = lastName;
+		this.role = role;
+		this.contactNumber = contactNumber;
+		this.status = status;
+		this.createdAt = createdAt;
+		this.createdBy = createdBy;
+		this.department = department;
 		
 	}
 	
