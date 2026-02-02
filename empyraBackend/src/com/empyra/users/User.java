@@ -14,6 +14,10 @@ public class User {
 	private String createdBy;
 	private String department;
 	
+	public User() {
+		
+	}
+	
 	
 	public User(String id, String firstName, String middleName, String lastName, String role,
 				String contactNumber, String status, Date createdAt, String createdBy, String department) {
