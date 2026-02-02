@@ -9,7 +9,7 @@ public class User {
 	private String lastName;
 	private String role;
 	private String contactNumber;
-	private int status;
+	private String status;
 	private Date createdAt;
 	private String createdBy;
 	private String department;
@@ -51,10 +51,10 @@ public class User {
 	public void setContactNumber(String contactNumber) {
 		this.contactNumber = contactNumber;
 	}
-	public int getStatus() {
+	public String getStatus() {
 		return status;
 	}
-	public void setStatus(int status) {
+	public void setStatus(String status) {
 		this.status = status;
 	}
 	public Date getCreatedAt() {
