@@ -22,12 +22,10 @@ public class LoginService {
 				if(username.equals(user.getUsername())) {
 					authUser = user;
 					break;
-				} else {
-					System.out.println("Issue encountered retrieving users");
 				}
 			}
 		} catch (Exception e2) {
-			throw new Exception("Issue encountered retrieveing users"+e2);
+			throw new Exception("There was an issue retrieving the user."+e2);
 		}
 		
 		return authUser;
