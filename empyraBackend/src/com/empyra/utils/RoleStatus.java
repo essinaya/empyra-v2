@@ -1,13 +1,13 @@
 package com.empyra.utils;
 
-public enum Status {
-	ACTIVE("Active"),
-	INACTIVE("Inactive"),
-	PENDING("Pending");
+public enum RoleStatus {
+	ACTIVE("ACTIVE"),
+	INACTIVE("INACTIVE"),
+	PENDING("PENDING");
 	
 	private String statusString;
 
-	Status(String string) {
+	RoleStatus(String string) {
 		this.setStatusString(string);
 	}
 

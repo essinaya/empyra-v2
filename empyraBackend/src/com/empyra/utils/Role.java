@@ -1,25 +1,25 @@
 package com.empyra.utils;
 
 public enum Role {
-	SYSTEM_ADMINISTRATOR("System Administrator", "Administration"),
-	PROPERTY_MANAGER("Property Manager", "Property Management Office"),
-	PMO_SUPERVISOR("PMO Supervisor", "Property Management Office"),
-	PMO_CLERK("PMO Clerk", "Property Management Office"),
-	MAINTENANCE_COORDINATOR("Maintenance Coordinator", "Maintenance"),
-	MAINTENANCE_STAFF("Maintenance Staff", "Maintenance"),
-	SECURITY_HEAD("Security Head", "Security"),
-	ROVING_GUARD("Roving Guard", "Security"),
-	GATE_GUARD("Gate Guard", "Security"),
-	UNIT_OWNER("Unit Owner", "Resident"),
-	TENANT("Tenant", "Resident"),
-	HOUSEHOLD_MEMBER("Household Member", "Resident");
+	SYSTEM_ADMINISTRATOR("System Administrator", Department.SYSTEM_ADMINISTRATION),
+	PROPERTY_MANAGER("Property Manager", Department.PROPERTY_MANAGEMENT),
+	PMO_SUPERVISOR("PMO Supervisor", Department.PROPERTY_MANAGEMENT),
+	PMO_CLERK("PMO Clerk", Department.PROPERTY_MANAGEMENT),
+	MAINTENANCE_COORDINATOR("Maintenance Coordinator", Department.MAINTENANCE),
+	MAINTENANCE_STAFF("Maintenance Staff", Department.MAINTENANCE),
+	SECURITY_HEAD("Security Head", Department.SECURITY),
+	ROVING_GUARD("Roving Guard", Department.SECURITY),
+	GATE_GUARD("Gate Guard", Department.SECURITY),
+	UNIT_OWNER("Unit Owner", Department.RESIDENT_SERVICES),
+	TENANT("Tenant", Department.RESIDENT_SERVICES),
+	HOUSEHOLD_MEMBER("Household Member", Department.RESIDENT_SERVICES);
 	
 	private String fullTitle;
-	private String department;
+	private Department department;
 	
-	private Role(String fullTitle, String department) {
+	private Role(String fullTitle, Department residentServices) {
 		this.fullTitle = fullTitle;
-		this.department = department;
+		this.department = residentServices;
 	}
 
 	public String getFullTitle() {
@@ -30,11 +30,11 @@ public enum Role {
 		this.fullTitle = fullTitle;
 	}
 
-	public String getDepartment() {
+	public Department getDepartment() {
 		return department;
 	}
 
-	public void setDepartment(String department) {
+	public void setDepartment(Department department) {
 		this.department = department;
 	}
 }

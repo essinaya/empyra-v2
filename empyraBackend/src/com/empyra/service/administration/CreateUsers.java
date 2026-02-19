@@ -1,33 +1,31 @@
 package com.empyra.service.administration;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
+import com.empyra.database.service.DatabaseConnectionService;
 import com.empyra.users.User;
-import com.empyra.users.administration.Administration;
-import com.empyra.users.maintenance.Maintenance;
-import com.empyra.users.propertymanagementoffice.PropertyManagementOffice;
+import com.empyra.utils.Department;
 import com.empyra.utils.Role;
-import com.empyra.utils.Status;
+import com.empyra.utils.RoleStatus;
 
 public class CreateUsers {
 	Scanner sc = new Scanner(System.in);
+	DatabaseConnectionService dcs = new DatabaseConnectionService();
 	
-	public User createUser() {
+	public void createUser(User user) throws Exception {
 		User newUser = new User();
-		System.out.println("=====Create User=====");
-		System.out.println("First Name: ");
+		System.out.println("[ADMIN]=====Create User=====");
+		System.out.print("First Name: ");
 		newUser.setFirstName(sc.nextLine());
-		System.out.println("Middle Name: ");
+		System.out.print("Middle Name: ");
 		newUser.setMiddleName(sc.nextLine());
-		System.out.println("Last Name: ");
+		System.out.print("Last Name: ");
 		newUser.setLastName(sc.nextLine());
-		System.out.println("Contact Number: ");
+		System.out.print("Contact Number: ");
 		newUser.setContactNumber(sc.nextLine());
 		System.out.println("For department, please choose from the following: ");
 		System.out.println("[1] Administration");
-		System.out.println("[2] Property Management Office [PMO]");
+		System.out.println("[2] Property Management Office (PMO)");
 		System.out.println("[3] Maintenance");
 		System.out.println("[4] Security");
 		System.out.println("[5] Resident");
@@ -35,10 +33,7 @@ public class CreateUsers {
 		int departmentChoice = sc.nextInt();
 		sc.nextLine();
 		newUser = setRole(departmentChoice, newUser);
-		//for ID
-		//get latest id from DB
-		//increment from there
-		return newUser;
+		System.out.println(dcs.createUser(newUser, user));
 	}
 	
 	private User setRole(int option, User userObj) {
@@ -47,8 +42,9 @@ public class CreateUsers {
 			//Approvals go to Sys Admin
 			//ID Format: EMPYRA-SYS-XXXXX
 			System.out.println("---->Administration");
-			userObj.setRole(Role.SYSTEM_ADMINISTRATOR.getFullTitle());
-			userObj.setDepartment(Role.SYSTEM_ADMINISTRATOR.getDepartment());
+			userObj.setRole(Role.SYSTEM_ADMINISTRATOR);
+			userObj.setDepartment(Department.SYSTEM_ADMINISTRATION);
+			break;
 		}case 2: {
 			//Approvals go to PMO
 			//ID Format: EMPYRA-PMO-XXXXX
@@ -59,15 +55,16 @@ public class CreateUsers {
 			sc.nextLine();
 			switch (pmoRole) {
 				case 1: {
-					userObj.setRole(Role.PROPERTY_MANAGER.getFullTitle());
-					userObj.setDepartment(Role.PROPERTY_MANAGER.getDepartment());
+					userObj.setRole(Role.PROPERTY_MANAGER);
+					userObj.setDepartment(Department.PROPERTY_MANAGEMENT);
 				}case 2: {
-					userObj.setRole(Role.PMO_SUPERVISOR.getFullTitle());
-					userObj.setDepartment(Role.PMO_SUPERVISOR.getDepartment());
+					userObj.setRole(Role.PMO_SUPERVISOR);
+					userObj.setDepartment(Department.PROPERTY_MANAGEMENT);
 				}case 3: {
-					userObj.setRole(Role.PMO_CLERK.getFullTitle());
-					userObj.setDepartment(Role.PMO_CLERK.getDepartment());
+					userObj.setRole(Role.PMO_CLERK);
+					userObj.setDepartment(Department.PROPERTY_MANAGEMENT);
 				}
+				break;
 			}
 		}case 3: {
 			//Approvals go to PMO
@@ -79,12 +76,13 @@ public class CreateUsers {
 			sc.nextLine();
 			switch (maintenanceRole) {
 				case 1: {
-					userObj.setRole(Role.MAINTENANCE_COORDINATOR.getFullTitle());
-					userObj.setDepartment(Role.MAINTENANCE_COORDINATOR.getDepartment());
+					userObj.setRole(Role.MAINTENANCE_COORDINATOR);
+					userObj.setDepartment(Department.MAINTENANCE);
 				}case 2: {
-					userObj.setRole(Role.MAINTENANCE_STAFF.getFullTitle());
-					userObj.setDepartment(Role.MAINTENANCE_STAFF.getDepartment());
+					userObj.setRole(Role.MAINTENANCE_STAFF);
+					userObj.setDepartment(Department.MAINTENANCE);
 				}
+				break;
 			}
 		}case 4: {
 			//ID Format: EMPYRA-SEC-XXXXX
@@ -95,16 +93,17 @@ public class CreateUsers {
 			sc.nextLine();
 			switch (securityRole) {
 				case 1: {
-					userObj.setRole(Role.SECURITY_HEAD.getFullTitle());
-					userObj.setDepartment(Role.SECURITY_HEAD.getDepartment());
+					userObj.setRole(Role.SECURITY_HEAD);
+					userObj.setDepartment(Department.SECURITY);
 				}case 2: {
-					userObj.setRole(Role.ROVING_GUARD.getFullTitle());
-					userObj.setDepartment(Role.ROVING_GUARD.getDepartment());
+					userObj.setRole(Role.ROVING_GUARD);
+					userObj.setDepartment(Department.SECURITY);
 				}
 				case 3: {
-					userObj.setRole(Role.GATE_GUARD.getFullTitle());
-					userObj.setDepartment(Role.GATE_GUARD.getDepartment());
+					userObj.setRole(Role.GATE_GUARD);
+					userObj.setDepartment(Department.SECURITY);
 				}
+				break;
 		}
 		}case 5: {
 			//ID Format: EMPYRA-RES-XXXXX
@@ -115,21 +114,22 @@ public class CreateUsers {
 			sc.nextLine();
 			switch (securityRole) {
 				case 1: {
-					userObj.setRole(Role.UNIT_OWNER.getFullTitle());
-					userObj.setDepartment(Role.UNIT_OWNER.getDepartment());
+					userObj.setRole(Role.UNIT_OWNER);
+					userObj.setDepartment(Department.RESIDENT_SERVICES);
 				}case 2: {
-					userObj.setRole(Role.TENANT.getFullTitle());
-					userObj.setDepartment(Role.TENANT.getDepartment());
+					userObj.setRole(Role.TENANT);
+					userObj.setDepartment(Department.RESIDENT_SERVICES);
 				}
 				case 3: {
-					userObj.setRole(Role.HOUSEHOLD_MEMBER.getFullTitle());
-					userObj.setDepartment(Role.HOUSEHOLD_MEMBER.getDepartment());
+					userObj.setRole(Role.HOUSEHOLD_MEMBER);
+					userObj.setDepartment(Department.RESIDENT_SERVICES);
 				}
 			
 			}
+			break;
 		}
 	}
-		userObj.setStatus(Status.PENDING.getStatusString());
+		userObj.setStatus(RoleStatus.PENDING.getStatusString());
 		return userObj;
 
 	}
