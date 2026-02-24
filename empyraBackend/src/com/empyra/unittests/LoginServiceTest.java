@@ -36,5 +36,14 @@ class LoginServiceTest {
 		
 		assertNull(actualResult.getUsername());
 	}
+	
+//	void loginTestException() throws Exception {
+//		String username = null, password = null;
+//		LoginService loginService = new LoginService();
+//		
+//		User actualResult = loginService.login(username, password);
+//		
+//		assertThrows(Exception, actualResult, "Exception thrown");
+//	}
 
 }
