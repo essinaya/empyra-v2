@@ -128,9 +128,10 @@ public class DatabaseConnectionService {
 				if(result != null) {
 					while(result.next()) {
 						userId = result.getString("USER_ID").trim().substring(0, 11);
+						
 						latestUserId = Integer.parseInt(result.getString("USER_ID").trim().substring(12));
 					}
-					latestUserId += latestUserId;
+					latestUserId = ++latestUserId;
 
 					String latestUserIdWithZeroes = String.format("%05d", latestUserId);
 					userId = userId.concat(latestUserIdWithZeroes);
@@ -142,7 +143,6 @@ public class DatabaseConnectionService {
 			e.printStackTrace();
 			throw new Exception("Error encoutered during generating of ID.");
 		}
-		
 		return userId;
 		
 	}

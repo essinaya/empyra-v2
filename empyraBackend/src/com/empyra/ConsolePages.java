@@ -48,24 +48,34 @@ public class ConsolePages {
 	
 	public void mainMenu(User authUser) throws Exception {
 		separator();
-		System.out.println("Welcome, "+authUser.getFirstName());
-		System.out.println("Please choose from the following: ");
-		System.out.println("[1] Messages");//Announcements, Complaints raised to you, Violations
-		System.out.println("[2] Tickets");//Complaints
-		System.out.println("[3] Create Request"); //car pass, visitor pass
-		System.out.println("[4] Search / View Directory");
-		System.out.println("[5] My Profile");
-		
-		
-		//Role related
-		roleSpecificMenu(authUser.getRole());
-		System.out.println("[20] Logout");
-		int menuChoice = sc.nextInt();
-		if(menuChoice ==6) {
-			CreateUsers cu = new CreateUsers();
-			cu.createUser(authUser);
+		int menuChoice = 0;
+		while(menuChoice != 20) {
+			System.out.println("Welcome, "+authUser.getFirstName());
+			System.out.println("Please choose from the following: ");
+			System.out.println("[1] Messages");//Announcements, Complaints raised to you, Violations
+			System.out.println("[2] Tickets");//Complaints
+			System.out.println("[3] Create Request"); //car pass, visitor pass
+			System.out.println("[4] Search / View Directory");
+			System.out.println("[5] My Profile");
+			
+			
+			//Role related
+			roleSpecificMenu(authUser.getRole());
+			System.out.println("[20] Logout");
+			menuChoice = sc.nextInt();
+			sc.nextLine();
+			if(menuChoice ==6) {
+				CreateUsers cu = new CreateUsers();
+				cu.createUser(authUser);
+			} else if (menuChoice == 20) {
+				System.out.println("Thank you for using Empyra. Goodbye!");
+			} else {
+				System.out.println("Feature is still under development. Please choose another.");
+			}
+			
+			
 		}
-		sc.nextLine();
+		
 	}
 	
 	private void separator() {

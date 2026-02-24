@@ -57,15 +57,18 @@ public class CreateUsers {
 				case 1: {
 					userObj.setRole(Role.PROPERTY_MANAGER);
 					userObj.setDepartment(Department.PROPERTY_MANAGEMENT);
+					break;
 				}case 2: {
 					userObj.setRole(Role.PMO_SUPERVISOR);
 					userObj.setDepartment(Department.PROPERTY_MANAGEMENT);
+					break;
 				}case 3: {
 					userObj.setRole(Role.PMO_CLERK);
 					userObj.setDepartment(Department.PROPERTY_MANAGEMENT);
+					break;
 				}
-				break;
 			}
+			break;
 		}case 3: {
 			//Approvals go to PMO
 			//ID Format: EMPYRA-MNT-XXXXX
@@ -78,12 +81,14 @@ public class CreateUsers {
 				case 1: {
 					userObj.setRole(Role.MAINTENANCE_COORDINATOR);
 					userObj.setDepartment(Department.MAINTENANCE);
+					break;
 				}case 2: {
 					userObj.setRole(Role.MAINTENANCE_STAFF);
 					userObj.setDepartment(Department.MAINTENANCE);
+					break;
 				}
-				break;
 			}
+			break;
 		}case 4: {
 			//ID Format: EMPYRA-SEC-XXXXX
 			System.out.println("---->Security");
@@ -95,16 +100,19 @@ public class CreateUsers {
 				case 1: {
 					userObj.setRole(Role.SECURITY_HEAD);
 					userObj.setDepartment(Department.SECURITY);
+					break;
 				}case 2: {
 					userObj.setRole(Role.ROVING_GUARD);
 					userObj.setDepartment(Department.SECURITY);
+					break;
 				}
 				case 3: {
 					userObj.setRole(Role.GATE_GUARD);
 					userObj.setDepartment(Department.SECURITY);
+					break;
 				}
-				break;
 		}
+			break;
 		}case 5: {
 			//ID Format: EMPYRA-RES-XXXXX
 			System.out.println("---->Resident");
@@ -116,15 +124,17 @@ public class CreateUsers {
 				case 1: {
 					userObj.setRole(Role.UNIT_OWNER);
 					userObj.setDepartment(Department.RESIDENT_SERVICES);
+					break;
 				}case 2: {
 					userObj.setRole(Role.TENANT);
 					userObj.setDepartment(Department.RESIDENT_SERVICES);
+					break;
 				}
 				case 3: {
 					userObj.setRole(Role.HOUSEHOLD_MEMBER);
 					userObj.setDepartment(Department.RESIDENT_SERVICES);
+					break;
 				}
-			
 			}
 			break;
 		}
