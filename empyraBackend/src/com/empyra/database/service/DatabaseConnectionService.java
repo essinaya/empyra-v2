@@ -144,7 +144,10 @@ public class DatabaseConnectionService {
 			throw new Exception("Error encoutered during generating of ID.");
 		}
 		return userId;
-		
 	}
+	
+//	public String updateUsers(User newUser, User authUser) {
+//		//cannot update user_id
+//	}
 
 }
