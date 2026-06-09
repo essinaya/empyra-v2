@@ -3,6 +3,7 @@ package com.empyra;
 import java.util.Scanner;
 
 import com.empyra.service.administration.CreateUsers;
+import com.empyra.service.administration.UpdateUsers;
 import com.empyra.users.User;
 import com.empyra.utils.Role;
 
@@ -64,14 +65,35 @@ public class ConsolePages {
 			System.out.println("[20] Logout");
 			menuChoice = sc.nextInt();
 			sc.nextLine();
-			if(menuChoice ==6) {
+			
+			switch (menuChoice) {
+			case 6: {
+				
 				CreateUsers cu = new CreateUsers();
 				cu.createUser(authUser);
-			} else if (menuChoice == 20) {
-				System.out.println("Thank you for using Empyra. Goodbye!");
-			} else {
-				System.out.println("Feature is still under development. Please choose another.");
+				break;
 			}
+			case 7: {
+				UpdateUsers uu = new UpdateUsers();
+				uu.updateUser(authUser);
+			}
+			case 20: {
+				
+				System.out.println("Thank you for using Empyra. Goodbye!");
+				break;
+			}
+			default:
+				System.out.println("Feature is still under development. Please choose another.");
+				break;
+			}
+//			if(menuChoice ==6) {
+//				CreateUsers cu = new CreateUsers();
+//				cu.createUser(authUser);
+//			} else if (menuChoice == 20) {
+//				System.out.println("Thank you for using Empyra. Goodbye!");
+//			} else {
+//				System.out.println("Feature is still under development. Please choose another.");
+//			}
 			
 			
 		}

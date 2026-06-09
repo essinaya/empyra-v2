@@ -146,8 +146,115 @@ public class DatabaseConnectionService {
 		return userId;
 	}
 	
-//	public String updateUsers(User newUser, User authUser) {
-//		//cannot update user_id
-//	}
+	public void updateUsers(User updatedUser, User authUser) throws IOException, SQLException {
+		//cannot update user_id
+		Connection con = connectToDatabase();
+		Statement st = con.createStatement();
+		
+		DateUtility dtUtil = new DateUtility();
+		
+		if(con!=null) {
+			
+			String sql = "UPDATE USERS SET FIRST_NAME = ?, MIDDLE_NAME = ?, LAST_NAME = ?,"
+					+ "USER_ROLE = ?, CONTACT_NUMBER = ?, USER_PASSWORD = ?, UPDATED_DT = ?,"
+					+ "UPDATED_BY = ?"
+					+ "WHERE USER_ID = ?";
+			
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setString(1, updatedUser.getFirstName());
+			ps.setString(2, updatedUser.getMiddleName());
+			ps.setString(3, updatedUser.getLastName());
+			ps.setString(4, updatedUser.getRole().toString());
+			ps.setString(5, updatedUser.getContactNumber());
+			ps.setString(6, updatedUser.getUser_password());
+			ps.setString(7, dtUtil.getDateTime());
+			ps.setString(8, authUser.getUsername());
+			ps.setString(9, updatedUser.getId());
+			
+			ps.executeUpdate();
+		}
+		
+	}
+	
+	public List<User> getActiveUsers() throws SQLException, IOException  {
+		List<User> usersList = new ArrayList<User>();
+		try {
+			Connection con = connectToDatabase();
+			
+			User dbUser = new User();
+			if(con!=null) {
+				System.out.println("Connected to the database");
+				Statement st = con.createStatement();
+				ResultSet result = st.executeQuery("SELECT * FROM USERS WHERE STATUS = 'ACTIVE'");
+				if(result != null) {
+					while (result.next()) {
+						dbUser = new User();
+					    dbUser.setId(result.getString("USER_ID"));
+					    dbUser.setFirstName(result.getString("FIRST_NAME"));
+					    dbUser.setMiddleName(result.getString("MIDDLE_NAME"));
+					    dbUser.setLastName(result.getString("LAST_NAME"));
+					    dbUser.setRole(Role.valueOf(result.getString("USER_ROLE")));
+					    dbUser.setContactNumber(result.getString("CONTACT_NUMBER"));
+					    dbUser.setStatus(result.getString("STATUS"));
+					    dbUser.setCreatedAt(result.getString("CREATED_AT"));
+					    dbUser.setCreatedBy(result.getString("CREATED_BY"));
+					    dbUser.setDepartment(Department.valueOf(result.getString("DEPARTMENT")));
+					    dbUser.setUsername(result.getString("USERNAME"));
+					    dbUser.setUser_password(result.getString("USER_PASSWORD"));
+					    dbUser.setUpdatedBy(result.getString("UPDATED_BY"));
+					    dbUser.setUpdatedDt(result.getString("UPDATED_DT"));
+					    usersList.add(dbUser);
+					}
+
+				}
+				st.close();
+				result.close();
+			}
+		} catch (SQLException sqlEx) {
+			throw new SQLException("Error encountered connecting to the database. Logs: "+sqlEx);
+		} catch (IOException ioEx) {
+			throw new IOException("Error encountered reading file. Logs: "+ioEx);
+		}
+		return usersList;
+	}
+	
+	public User getUserById(String userId) throws SQLException, IOException {
+		User dbUser = new User();
+		try {
+			Connection con = connectToDatabase();
+			
+			
+			if(con!=null) {
+				System.out.println("Connected to the database");
+				Statement st = con.createStatement();
+				ResultSet result = st.executeQuery("SELECT * FROM USERS WHERE USER_ID = '"+userId+"'");
+				if(result != null) {
+						dbUser = new User();
+					    dbUser.setId(result.getString("USER_ID"));
+					    dbUser.setFirstName(result.getString("FIRST_NAME"));
+					    dbUser.setMiddleName(result.getString("MIDDLE_NAME"));
+					    dbUser.setLastName(result.getString("LAST_NAME"));
+					    dbUser.setRole(Role.valueOf(result.getString("USER_ROLE")));
+					    dbUser.setContactNumber(result.getString("CONTACT_NUMBER"));
+					    dbUser.setStatus(result.getString("STATUS"));
+					    dbUser.setCreatedAt(result.getString("CREATED_AT"));
+					    dbUser.setCreatedBy(result.getString("CREATED_BY"));
+					    dbUser.setDepartment(Department.valueOf(result.getString("DEPARTMENT")));
+					    dbUser.setUsername(result.getString("USERNAME"));
+					    dbUser.setUser_password(result.getString("USER_PASSWORD"));
+					    dbUser.setUpdatedBy(result.getString("UPDATED_BY"));
+					    dbUser.setUpdatedDt(result.getString("UPDATED_DT"));
+
+				}
+				st.close();
+				result.close();
+			}
+		} catch (SQLException sqlEx) {
+			throw new SQLException("Error encountered connecting to the database. Logs: "+sqlEx);
+		} catch (IOException ioEx) {
+			throw new IOException("Error encountered reading file. Logs: "+ioEx);
+		}
+		return dbUser;
+	}
 
 }
