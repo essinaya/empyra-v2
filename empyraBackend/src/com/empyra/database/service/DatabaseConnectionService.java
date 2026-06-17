@@ -63,9 +63,7 @@ public class DatabaseConnectionService {
 	
 	public String createUser(User newUser, User authUser) throws Exception {
 		DateUtility dtUtil = new DateUtility();
-		UserUtility userUtil = new UserUtility();
-		String generatedUsername = userUtil.generateDefaultUsername(newUser);
-
+		String generatedUsername = newUser.getFirstName().toLowerCase().concat("."+newUser.getLastName());
 		Connection con = connectToDatabase();
 		String sql = "INSERT INTO USERS (USER_ID, FIRST_NAME, MIDDLE_NAME, LAST_NAME, USER_ROLE,"
 				   + "CONTACT_NUMBER, STATUS, CREATED_AT, CREATED_BY, DEPARTMENT, USERNAME, USER_PASSWORD, "
@@ -127,7 +125,8 @@ public class DatabaseConnectionService {
 								   +"' ORDER BY USER_ID DESC FETCH FIRST 1 ROWS ONLY;");
 				if(result != null) {
 					while(result.next()) {
-						userId = result.getString("USER_ID").trim().substring(0, 11);
+						userId = result.getString("USER_ID").trim().substring(0, 7);
+						//EMPYRA-SYS-00001
 						
 						latestUserId = Integer.parseInt(result.getString("USER_ID").trim().substring(12));
 					}
